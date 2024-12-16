@@ -101,8 +101,8 @@ public class BaseTest {
     }
 
     public void scrollIntoElement(WebElement element) {
-        ((JavascriptExecutor) driver)
-                .executeScript("arguments[0].scrollIntoView();", element);
+        ((JavascriptExecutor) Driver.getDriver())
+                .executeScript("arguments[0].scrollIntoView(false);", element);
     }
 
 
@@ -172,6 +172,10 @@ public class BaseTest {
      */
     public WebElement waitForPresenceOfElement(By locator) {
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
+    public List<WebElement> waitForPresenceOfAllElements(By locator) {
+        return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
     }
 
     /**
