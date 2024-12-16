@@ -4,6 +4,7 @@ import driver.Driver;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import pages.HomePage;
 
@@ -43,5 +44,20 @@ public class HomePageSteps {
     @And("the slider content should be visible")
     public void theSliderContentShouldBeVisible() {
         homePage.verifyTheSliderContentIsVisible();
+    }
+
+    @When("I click on the burger menu")
+    public void iClickOnTheBurgerMenu() {
+        homePage.clickBurgerMenu();
+    }
+
+    @Then("I should see the sidebar with its contents")
+    public void iShouldSeeTheSidebarWithItsContents() {
+        homePage.waitForSidebarContentsToBeVisible();
+    }
+
+    @When("I open the {string} page")
+    public void iOpenThePage(String linkName) {
+        homePage.openTheSpecifiedPage(linkName);
     }
 }
