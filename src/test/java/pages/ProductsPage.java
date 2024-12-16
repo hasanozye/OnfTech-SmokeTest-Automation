@@ -23,6 +23,7 @@ public class ProductsPage extends BaseTest {
         Products product = Products.fromName(productName);
         scrollIntoElement(product.getReportLocator());
         click(product.getReportLocator());
+        // TODO: 12/17/2024 enum ile dinamik şekilde ürünlere tıklama tamamlandı, bundan sonrası verification ve validasyon yapcan yine dinamik olarak sayfalarda. GJ WP boi.
     }
 
 }
