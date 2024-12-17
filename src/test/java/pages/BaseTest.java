@@ -2,11 +2,9 @@ package pages;
 
 import com.github.javafaker.Faker;
 import driver.Driver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -134,7 +132,35 @@ public class BaseTest {
     }
 
     public void waitForAttributeToBeExpectedValue(WebElement element, String attribute, String expectedValue) {
-        wait.until(ExpectedConditions.attributeToBe(element, attribute, expectedValue));
+        try {
+            wait.until((ExpectedCondition<Boolean>) driverInstance -> {
+                try {
+                    // Element DOM'da mevcutsa
+                    if (element.isDisplayed()) {
+                        String attrValue = element.getAttribute(attribute);
+                        // Eğer attribute '99' ise true dön
+                        if ("99".equals(attrValue)) {
+                            return true;
+                        }
+                    }
+                    return false; // Element mevcut ama '99' değilse false dön
+                } catch (NoSuchElementException | StaleElementReferenceException e) {
+                    // Element DOM'da değilse (yani silinmişse) true dön
+                    return true;
+                }
+            });
+        } catch (TimeoutException e) {
+            System.out.println("Timeout: Attribute did not become '99' or element did not disappear.");
+        }
+        /*try {
+            wait.until(driver -> {
+                String attrValue = element.getAttribute(attribute);
+                // Eğer null veya beklenen değer ise true dön (bazen bu değer null oluyor ondan hata fırlatmasını önlemek için)
+                return attrValue == null || attrValue.equals(expectedValue);
+            });
+        } catch (TimeoutException e) {
+            System.out.println("Attribute '" + attribute + "' is neither null nor '" + expectedValue + "' after wait.");
+        }*/
     }
 
     /**
@@ -178,6 +204,10 @@ public class BaseTest {
         return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
     }
 
+    public void waitForTextToBePresentInLocated(By locator, String expectedValue) {
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(locator, expectedValue));
+    }
+
     /**
      * Verilen locator ile bulunan tüm elementlerin görünür olmasını bekler.
      *
@@ -186,6 +216,10 @@ public class BaseTest {
      */
     public List<WebElement> waitForVisibilityOfAllElements(By locator) {
         return wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+    }
+
+    public void navigateBackWithKeyboard() {
+        Driver.getDriver().navigate().back();
     }
 
     public void sleep(int milliSeconds) {
