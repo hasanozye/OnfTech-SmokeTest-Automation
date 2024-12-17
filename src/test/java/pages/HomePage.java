@@ -22,6 +22,8 @@ public class HomePage extends BaseTest {
     public WebElement paceProgress;
     @FindBy(xpath = "//div[@class='header__logo']")
     public WebElement headerLogo;
+    @FindBy(xpath = "//div[@class='pace pace-active']")
+    public WebElement paceActiveFirstPageLoading;
     @FindBy(xpath = "//div[@class='owl-item active']/descendant::div[@class='slider-content']")
     public WebElement sliderContent;
     @FindBy(xpath = "//div[@class='header-burger']")
