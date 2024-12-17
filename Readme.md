@@ -1,6 +1,6 @@
 # OnfTech Smoke Test Automation 🚀
 
-This project is a **smoke test automation** framework for the OnfTech website, developed using **Java**, **Selenium WebDriver**, **Cucumber**, and **TestNG**. It is designed to verify the critical pages and components of the OnfTech website efficiently.
+This project is a **smoke test automation** framework for the OnfTech website, developed using **Java**, **Selenium**, **Cucumber**, and **TestNG**. It is designed to verify the critical pages and components of the OnfTech website efficiently.
 
 ---
 
