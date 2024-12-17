@@ -5,16 +5,19 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
+import pages.HomePage;
 import pages.ProductsPage;
 
 public class ProductsPageSteps {
 
     ProductsPage productsPage;
+    HomePage homePage;
     WebDriver driver;
 
     public ProductsPageSteps() {
         driver = Driver.getDriver();
         productsPage = new ProductsPage();
+        homePage = new HomePage();
     }
 
     @Then("I should see the list of available products")
@@ -24,14 +27,9 @@ public class ProductsPageSteps {
 
     @When("I click on the {string} product link")
     public void iClickOnTheProductLink(String productLink) {
+        homePage.waitUntilPageLoadedFully();
+        homePage.verifyLogoIsDisplayed();
         productsPage.openTheProductDetailsPage(productLink);
     }
 
-    @Then("I should see the product details page for {string}")
-    public void iShouldSeeTheProductDetailsPageFor(String arg0) {
-    }
-
-    @And("I should be able to return to the Products page")
-    public void iShouldBeAbleToReturnToTheProductsPage() {
-    }
 }
