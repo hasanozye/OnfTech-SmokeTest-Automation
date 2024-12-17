@@ -11,7 +11,7 @@ import io.cucumber.testng.CucumberOptions;
                 "html:test-output/cucumber-reports/cucumberReport.html",
                 "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
         },
-        tags = "@homePageTest"
+        tags = "@productsPageTest"
 )
 public class Runner extends AbstractTestNGCucumberTests {
 

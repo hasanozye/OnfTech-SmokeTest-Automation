@@ -60,24 +60,3 @@ Feature: OnfTech Landing Page Smoke Test
     When I click on the "API Gateway" product link
     Then I should see the product details page for the clicked link
     And  I should be able to return to the Products page
-
-
- #@pricingPageTest
- #Scenario: Navigate to Pricing Page and Verify Plans
- #  When I click on the "Pricing" navigation link
- #  Then I should see the pricing plans section displayed
- #  And the page title should contain "Pricing"
- #  And the page URL should be "https://onftech.com/pricing"
- #  When I interact with the pricing slider for 5 websites
- #  Then the price details should update correctly
- #  When I interact with the pricing slider for 10 websites
- #  Then the price details should update correctly
-
- #@joinPageTest
- #Scenario: Navigate to Join Page and Verify Sign-Up Form
- #  When I click on the "Join" navigation link
- #  Then the page title should contain "Join"
- #  And the page URL should be "https://onftech.com/join"
- #  When I fill out the sign-up form with valid data
- #  And I submit the form
- #  Then I should see a confirmation message "Thank you for signing up!"

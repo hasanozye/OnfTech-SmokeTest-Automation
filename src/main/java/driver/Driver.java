@@ -36,7 +36,7 @@ public class Driver {
             }
         }
 
-        waits.set(new WebDriverWait(drivers.get(), Duration.ofSeconds(10)));
+        waits.set(new WebDriverWait(drivers.get(), Duration.ofSeconds(5)));
         return drivers.get();
 
     }
