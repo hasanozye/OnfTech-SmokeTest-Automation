@@ -2,9 +2,7 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import static pages.Products.TWG;
+import utils.ScenarioContext;
 
 
 public class ProductsPage extends BaseTest {
@@ -20,38 +18,97 @@ public class ProductsPage extends BaseTest {
     }
 
     public void openTheProductDetailsPage(String productName) {
-        Products product = Products.fromName(productName);
-        scrollIntoElement(product.getReportLocator());
-        click(product.getReportLocator());
-        // TODO: 12/17/2024 enum ile dinamik şekilde ürünlere tıklama tamamlandı, bundan sonrası verification ve validasyon yapcan yine dinamik olarak sayfalarda. GJ WP boi.
+        Products currentProduct = Products.fromName(productName);
+        ScenarioContext.setContext("currentProduct", currentProduct);
+
+        By productDescriptionXPathLocator = currentProduct.getProductDescriptionXPathLocator();
+        String productDescriptionXPathStringText = driver.findElement(productDescriptionXPathLocator).getText();
+        ScenarioContext.setContext("currentProductDescText", productDescriptionXPathStringText);
+
+        scrollIntoElement(currentProduct.getProductDescriptionXPathLocator());
+        click(currentProduct.getProductHeaderXPathLocator());
+
     }
 
 }
 
 enum Products {
-    TWG("TWG - Tanfeeth Watheeq Gateway",
-            By.xpath("//h2/child::a[contains(.,'TWG - Tanfeeth Watheeq Gateway')]")
+    TWG("Tanfeeth Watheeq Gateway",
+            By.xpath("//h2/child::a[contains(.,'TWG - Tanfeeth Watheeq Gateway')]"),
+            By.xpath("//div[@class='project-desc' and contains(.,'Tanfeeth')]")
     ),
     LGG(
-            "LGG - Letter of Guarantee Gateway",
-            By.xpath("//h2/child::a[contains(.,'LGG - Letter of Guarantee Gateway')]")
+            "Letter of Guarantee Gateway",
+            By.xpath("//h2/child::a[contains(.,'LGG - Letter of Guarantee Gateway')]"),
+            By.xpath("//div[@class='project-desc' and contains(.,'LGG')]")
+    ),
+    ODG(
+            "Online Document Gateway",
+            By.xpath("//h2/child::a[contains(.,'ODG - Online Document Gateway')]"),
+            By.xpath("//div[@class='project-desc' and contains(.,'ODG')]")
+    ),
+    IANALYTICS(
+            "iAnalytics",
+            By.xpath("//h2/child::a[contains(.,'iAnalytics')]"),
+            By.xpath("//div[@class='project-desc' and contains(.,'iAnalytics')]")
+    ),
+    EGG(
+            "Electronic Government Gateway",
+            By.xpath("//h2/child::a[contains(.,'EGG - Electronic Government Gateway')]"),
+            By.xpath("//div[@class='project-desc' and contains(.,'EGG')]")
+    ),
+    GSAD(
+            "Gateway of SADAD",
+            By.xpath("//h2/child::a[contains(.,'GSAD - Gateway of SADAD')]"),
+            By.xpath("//div[@class='project-desc' and contains(.,'GSAD')]")
+    ),
+    OBRIDGE(
+            "Open Banking Solution",
+            By.xpath("//h2/child::a[contains(.,'OBridge - Open Banking Solution')]"),
+            By.xpath("//div[@class='project-desc' and contains(.,'Open Banking solution')]")
+    ),
+    ONFTICKET(
+            "Your Ultimate IT Service Management Solution",
+            By.xpath("//h2/child::a[contains(.,'ONFTicket - Your Ultimate IT Service Management Solution')]"),
+            By.xpath("//div[@class='project-desc' and contains(.,'ONFTicket')]")
+    ),
+    IAK(
+            "Unlock Compliance Excellence",
+            By.xpath("//h2/child::a[contains(.,'IAK (Integrated AML-KYC) - Unlock Compliance Excellence')]"),
+            By.xpath("//div[@class='project-desc' and contains(.,'IAK')]")
+    ),
+    IGRC(
+            "The Integrated Governance, Risk, and Compliance",
+            By.xpath("//h2/child::a[contains(.,'IGRC - The Integrated Governance, Risk, and Compliance')]"),
+            By.xpath("//div[@class='project-desc' and contains(.,'IGRC')]")
+    ),
+    AGIP(
+            "API Gateway",
+            By.xpath("//h2/child::a[contains(.,'API Gateway (AGIP)')]"),
+            By.xpath("//div[@class='project-desc' and contains(.,'API')]")
     );
 
 
     private final String productName;
-    private final By productXPathLocator;
+    private final By productHeaderXPathLocator;
+    private final By productDescriptionXPathLocator;
 
-    Products(String productName, By productXPathLocator) {
+    Products(String productName, By productHeaderXPathLocator, By productDescriptionXPathLocator) {
         this.productName = productName;
-        this.productXPathLocator = productXPathLocator;
+        this.productHeaderXPathLocator = productHeaderXPathLocator;
+        this.productDescriptionXPathLocator = productDescriptionXPathLocator;
     }
 
-    public By getReportLocator() {
-        return productXPathLocator;
+    public By getProductHeaderXPathLocator() {
+        return productHeaderXPathLocator;
     }
 
     public String getProductName() {
         return productName;
+    }
+
+    public By getProductDescriptionXPathLocator() {
+        return productDescriptionXPathLocator;
     }
 
     public static Products fromName(String productName) {
