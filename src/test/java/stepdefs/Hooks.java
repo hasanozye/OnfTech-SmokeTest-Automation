@@ -10,12 +10,12 @@ import readers.property.PropertyReader;
 
 public class Hooks {
 
-    /*@After
+    @After
     public void tearDown() {
         if (Driver.getDriver() != null) {
             Driver.quitDriver();
         }
-    }*/
+    }
 
     @AfterStep
     public void afterStepSS(Scenario scenario) {
