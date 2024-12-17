@@ -53,9 +53,7 @@ OnfTech-SmokeTest-Automation
 │   │   ├── extent.properties                           # ExtentReport settings
 └── test-output                           # Test output, screenshots, and reports
 ```
-## Screenshots 🖼️
 
-![Test Automation Demo](C:\Users\e 15\IdeaProjects\Onftech\test-output\screenshots\embedded1.png)
 
 
 
